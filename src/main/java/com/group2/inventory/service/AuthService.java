@@ -3,7 +3,6 @@ package com.group2.inventory.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.group2.inventory.model.AuthEntity;
 import com.group2.inventory.repository.AuthRepository;
 
 @Service
@@ -15,27 +14,17 @@ public class AuthService {
     // Business logic: Login
     public String login(String username, String password) {
         // Validation
-        if (username == null || username.trim().isEmpty()) {
-            return "Username is required!";
+        if (!"admin".equals(username)) {
+            return "Invalid username!";
         }
 
-        if (password == null || password.trim().isEmpty()) {
-            return "Password is required!";
-        }
-
-        // Business logic: Find user
-        AuthEntity user = authRepository.findByUsername(username.toLowerCase());
-        
-        if (user == null) {
-            return "User not found!";
-        }
-
-        // Business logic: Check password
-        if (!user.getPassword().equals(password)) {
+        if (!"1234".equals(password)) {
             return "Invalid password!";
         }
 
-        return "Login successful! Welcome, " + user.getUsername();
+
+        System.out.println("Login successful! Welcome, " + username);
+        return "Login successful! Welcome, " + username;
     }
 }
 
